@@ -13,6 +13,7 @@ namespace CasaDoCodigo.Console
             using (var contexto = new CatalogoDbContext())
             {
                 contexto.Database.Migrate();
+                //contexto.Database.EnsureCreated();
 
                 if (!contexto.Set<Categoria>()
                     .Where(c => c.Nome == "Arquitetura de Software").Any())
