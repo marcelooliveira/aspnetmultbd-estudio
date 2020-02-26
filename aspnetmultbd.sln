@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasaDoCodigo.Console", "Ite
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasaDoCodigo.MVC", "Item01\depois\CasaDoCodigo.MVC\CasaDoCodigo.MVC.csproj", "{B5547DD6-F048-4A76-A7B2-C23A85E64AC5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CasaDoCodigo.MVC", "Item01\antes\CasaDoCodigo.MVC\CasaDoCodigo.MVC.csproj", "{67B231B0-78D3-4A8C-928B-89C2BC5D9B4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B5547DD6-F048-4A76-A7B2-C23A85E64AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5547DD6-F048-4A76-A7B2-C23A85E64AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5547DD6-F048-4A76-A7B2-C23A85E64AC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67B231B0-78D3-4A8C-928B-89C2BC5D9B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B231B0-78D3-4A8C-928B-89C2BC5D9B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B231B0-78D3-4A8C-928B-89C2BC5D9B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B231B0-78D3-4A8C-928B-89C2BC5D9B4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 		{EBD7FA51-C0AA-4CCD-92F6-26BC74CE991A} = {282ABB64-0A25-439D-83AE-4D58EB8A9787}
 		{9126BFE0-8D07-4ED5-B794-FA0760720615} = {EBD7FA51-C0AA-4CCD-92F6-26BC74CE991A}
 		{B5547DD6-F048-4A76-A7B2-C23A85E64AC5} = {D397E4BC-61F2-45F1-8E64-0E1E5CBC98E2}
+		{67B231B0-78D3-4A8C-928B-89C2BC5D9B4B} = {EBD7FA51-C0AA-4CCD-92F6-26BC74CE991A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {730DB6AD-C924-40EB-B18E-DD8E87F99608}
