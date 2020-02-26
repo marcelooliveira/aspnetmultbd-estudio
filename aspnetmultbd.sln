@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Item01", "Item01", "{282ABB64-0A25-439D-83AE-4D58EB8A9787}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Item01 - SQL Server", "Item01 - SQL Server", "{282ABB64-0A25-439D-83AE-4D58EB8A9787}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "depois", "depois", "{D397E4BC-61F2-45F1-8E64-0E1E5CBC98E2}"
 EndProject
