@@ -37,8 +37,13 @@ namespace CasaDoCodigo
             services.AddDistributedMemoryCache();
             services.AddSession();
 
-            ConfigurarContexto<ApplicationContext>(services, "Default");
-            ConfigurarContexto<CatalogoDbContext>(services, "Catalogo");
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Default"))
+            );
+
+            services.AddDbContext<CatalogoDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("Catalogo"))
+            );
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IHttpHelper, HttpHelper>();
@@ -51,20 +56,11 @@ namespace CasaDoCodigo
             services.AddAuthentication();
         }
 
-        private void ConfigurarContexto<T>(IServiceCollection services, string nomeConexao) where T : DbContext
-        {
-            string connectionString = Configuration.GetConnectionString(nomeConexao);
-
-            services.AddDbContext<T>(options =>
-                options.UseSqlServer(connectionString)
-            );
-        }
-
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,
             IServiceProvider serviceProvider)
         {
             MigrateDatabase<ApplicationContext>(app);
-            MigrateDatabase<CatalogoDbContext>(app);
+            CreateDatabase<CatalogoDbContext>(app);
 
             _loggerFactory.AddSerilog();
 
@@ -118,6 +114,19 @@ namespace CasaDoCodigo
                 using (var context = serviceScope.ServiceProvider.GetService<T>())
                 {
                     context.Database.Migrate();
+                }
+            }
+        }
+
+        private static void CreateDatabase<T>(IApplicationBuilder app) where T : DbContext
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<T>())
+                {
+                    context.Database.EnsureCreated();
                 }
             }
         }
