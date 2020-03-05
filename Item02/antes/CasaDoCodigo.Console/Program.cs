@@ -48,17 +48,22 @@ namespace CasaDoCodigo.Console
                             || q.Categoria.Nome.ToLower().Contains(pesquisa))
                             .ToList();
 
-                    System.Console.WriteLine();
-                    System.Console.WriteLine("Resultado:");
-                    System.Console.WriteLine("==========");
-                    foreach (var produto in resultado)
-                    {
-                        System.Console.WriteLine("ID: {0}, Codigo: {1}, CategoriaId: {2}, Nome: {3}", produto.Id, produto.Codigo, produto.CategoriaId, produto.Nome);
-                    }
+                    ImprimirResultado(resultado);
                 } while (!string.IsNullOrEmpty(pesquisa));
 
                 System.Console.WriteLine("Tecle ENTER para sair...");
                 System.Console.ReadLine();
+            }
+        }
+
+        private static void ImprimirResultado(System.Collections.Generic.List<Produto> resultado)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("Resultado:");
+            System.Console.WriteLine("==========");
+            foreach (var produto in resultado)
+            {
+                System.Console.WriteLine("ID: {0}, Codigo: {1}, CategoriaId: {2}, Nome: {3}", produto.Id, produto.Codigo, produto.CategoriaId, produto.Nome);
             }
         }
 
