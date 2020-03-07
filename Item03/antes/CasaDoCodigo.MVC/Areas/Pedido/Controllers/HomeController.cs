@@ -44,7 +44,7 @@ namespace CasaDoCodigo.Areas.Pedido.Controllers
 
                 await userManager.UpdateAsync(usuario);
 
-                return View(await pedidoRepository.UpdateCadastroAsync(cadastro));
+                return View(await pedidoRepository.FecharPedidoAsync(cadastro));
             }
             return Redirect("/Cadastro");
         }

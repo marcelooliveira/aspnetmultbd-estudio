@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CasaDoCodigo.Areas.Identity.Data;
 using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewModels;
 using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,10 +16,13 @@ namespace CasaDoCodigo.Areas.Carrinho.Controllers
     public class HomeController : Controller
     {
         private readonly IPedidoRepository pedidoRepository;
+        private readonly UserManager<AppIdentityUser> userManager;
 
-        public HomeController(IPedidoRepository pedidoRepository)
+        public HomeController(IPedidoRepository pedidoRepository,
+            UserManager<AppIdentityUser> userManager)
         {
             this.pedidoRepository = pedidoRepository;
+            this.userManager = userManager;
         }
 
         [Authorize]

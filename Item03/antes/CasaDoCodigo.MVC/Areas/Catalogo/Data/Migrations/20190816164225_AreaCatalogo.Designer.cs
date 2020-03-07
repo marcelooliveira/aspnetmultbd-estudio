@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CasaDoCodigo.Areas.Catalogo.Data.Migrations
 {
-    [DbContext(typeof(CatalogoDbContext))]
+    [DbContext(typeof(CarrinhoDbContext))]
     [Migration("20190816164225_AreaCatalogo")]
     partial class AreaCatalogo
     {

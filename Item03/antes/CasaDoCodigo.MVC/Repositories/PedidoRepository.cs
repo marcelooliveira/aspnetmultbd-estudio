@@ -15,9 +15,10 @@ namespace CasaDoCodigo.Repositories
     public interface IPedidoRepository
     {
         Task<Pedido> GetPedidoAsync();
-        Task AddItemAsync(string codigo);
+        Task<ItemPedido> AddItemAsync(string codigo);
+        Task<ItemPedido> AddItemAsync(string codigo, int quantidade);
         Task<UpdateQuantidadeResponse> UpdateQuantidadeAsync(ItemPedido itemPedido);
-        Task<Pedido> UpdateCadastroAsync(Cadastro cadastro);
+        Task<Pedido> FecharPedidoAsync(Cadastro cadastro);
     }
 
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
@@ -43,7 +44,12 @@ namespace CasaDoCodigo.Repositories
             this.produtoRepository = produtoRepository;
         }
 
-        public async Task AddItemAsync(string codigo)
+        public async Task<ItemPedido> AddItemAsync(string codigo)
+        {
+            return await AddItemAsync(codigo, 1);
+        }
+
+        public async Task<ItemPedido> AddItemAsync(string codigo, int quantidade)
         {
             var produto = await produtoRepository.GetProdutoAsync(codigo);
 
@@ -62,13 +68,14 @@ namespace CasaDoCodigo.Repositories
 
             if (itemPedido == null)
             {
-                itemPedido = new ItemPedido(pedido, produto.Codigo, produto.Nome, 1, produto.Preco);
+                itemPedido = new ItemPedido(pedido, produto.Codigo, produto.Nome, quantidade, produto.Preco);
                 await
                     contexto.Set<ItemPedido>()
                     .AddAsync(itemPedido);
 
                 await contexto.SaveChangesAsync();
             }
+            return itemPedido;
         }
 
         public async Task<Pedido> GetPedidoAsync()
@@ -117,7 +124,7 @@ namespace CasaDoCodigo.Repositories
             throw new ArgumentException("ItemPedido não encontrado");
         }
 
-        public async Task<Pedido> UpdateCadastroAsync(Cadastro cadastro)
+        public async Task<Pedido> FecharPedidoAsync(Cadastro cadastro)
         {
             var pedido = await GetPedidoAsync();
             await cadastroRepository.UpdateAsync(pedido.Cadastro.Id, cadastro);

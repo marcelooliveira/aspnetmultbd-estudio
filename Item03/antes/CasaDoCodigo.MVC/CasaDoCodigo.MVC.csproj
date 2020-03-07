@@ -38,6 +38,14 @@
   <ItemGroup>
     <Compile Include="Areas\Cadastro\Controllers\HomeController.cs" />
     <Compile Include="Areas\Carrinho\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Carrinho\Data\CarrinhoDbContext.cs" />
+    <Compile Include="Areas\Carrinho\Data\Repositories\ICarrinhoRepository.cs" />
+    <Compile Include="Areas\Carrinho\Data\Repositories\SQLCarrinhoRepository.cs" />
+    <Compile Include="Areas\Carrinho\Data\Repositories\RedisCarrinhoRepository.cs" />
+    <Compile Include="Areas\Carrinho\Models\Carrinho.cs" />
+    <Compile Include="Areas\Carrinho\Models\ItemCarrinho.cs" />
+    <Compile Include="Areas\Carrinho\Models\UpdateQuantidadeInput.cs" />
+    <Compile Include="Areas\Carrinho\Models\UpdateQuantidadeOutput.cs" />
     <Compile Include="Areas\Catalogo\Controllers\HomeController.cs" />
     <Compile Include="Areas\Catalogo\Data\CatalogoDbContext.cs" />
     <Compile Include="Areas\Catalogo\Data\Migrations\20190816164225_AreaCatalogo.cs" />
@@ -103,8 +111,6 @@
   <ItemGroup>
     <Folder Include="Areas\Cadastro\Data\" />
     <Folder Include="Areas\Cadastro\Models\" />
-    <Folder Include="Areas\Carrinho\Data\" />
-    <Folder Include="Areas\Carrinho\Models\" />
     <Folder Include="Areas\Pedido\Data\" />
     <Folder Include="Areas\Pedido\Models\" />
     <Folder Include="wwwroot\images\produtos\" />
