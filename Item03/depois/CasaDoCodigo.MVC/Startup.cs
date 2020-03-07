@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Areas.Catalogo.Data;
+﻿using CasaDoCodigo.Areas.Carrinho.Data;
+using CasaDoCodigo.Areas.Catalogo.Data;
 using CasaDoCodigo.Areas.Catalogo.Data.Repositories;
 using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Serilog;
+using StackExchange.Redis;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -45,11 +47,27 @@ namespace CasaDoCodigo
                 options.UseSqlite(Configuration.GetConnectionString("Catalogo"))
             );
 
+
+            //Ao conectar aqui, garantimos que nosso serviço
+            //não pode iniciar até que o redis esteja pronto.
+            //Isso pode diminuir a inicialização,
+            //mas dado que existe um atraso na resolução do endereço IP
+            //e, em seguida, criando a conexão, parece razoável mudar
+            //esse custo para iniciar em vez de ter o primeiro pedido pagar o
+            //multa.
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("RedisConnectionString"), true);
+                configuration.ResolveDns = true;
+                return ConnectionMultiplexer.Connect(configuration);
+            });
+
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IHttpHelper, HttpHelper>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddTransient<ICadastroRepository, CadastroRepository>();
+            services.AddTransient<ICarrinhoRepository, RedisCarrinhoRepository>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
