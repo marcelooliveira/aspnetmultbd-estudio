@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Areas.Catalogo.Data.Repositories;
+﻿using CasaDoCodigo.Areas.Carrinho.Models;
+using CasaDoCodigo.Areas.Catalogo.Data.Repositories;
 using CasaDoCodigo.Areas.Identity.Data;
 using CasaDoCodigo.Models;
 using CasaDoCodigo.Models.ViewModels;
@@ -18,7 +19,7 @@ namespace CasaDoCodigo.Repositories
         Task<ItemPedido> AddItemAsync(string codigo);
         Task<ItemPedido> AddItemAsync(string codigo, int quantidade);
         Task<UpdateQuantidadeResponse> UpdateQuantidadeAsync(ItemPedido itemPedido);
-        Task<Pedido> FecharPedidoAsync(Cadastro cadastro);
+        Task<Pedido> FecharPedidoAsync(Carrinho carrinho, Cadastro cadastro);
     }
 
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
@@ -124,11 +125,23 @@ namespace CasaDoCodigo.Repositories
             throw new ArgumentException("ItemPedido não encontrado");
         }
 
-        public async Task<Pedido> FecharPedidoAsync(Cadastro cadastro)
+        public async Task<Pedido> FecharPedidoAsync(Carrinho carrinho, Cadastro cadastro)
         {
-            var pedido = await GetPedidoAsync();
+            var pedido = await GerarPedido(carrinho);
             await cadastroRepository.UpdateAsync(pedido.Cadastro.Id, cadastro);
             httpHelper.ResetPedidoId();
+            return pedido;
+        }
+
+        private async Task<Pedido> GerarPedido(Carrinho carrinho)
+        {
+            var pedido = await GetPedidoAsync();
+            foreach (var item in carrinho.Itens)
+            {
+                var itemPedido = await AddItemAsync(item.ProdutoCodigo, item.Quantidade);
+                await UpdateQuantidadeAsync(itemPedido);
+            }
+
             return pedido;
         }
 

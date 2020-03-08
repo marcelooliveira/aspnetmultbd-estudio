@@ -94,15 +94,24 @@ namespace CasaDoCodigo.Areas.Carrinho.Data
             if (item.Quantidade < 0)
                 throw new ArgumentOutOfRangeException();
 
-            var carrinho = await GetCarrinhoAsync(customerId);
-            ItemCarrinho itemDB = carrinho.Itens.Where(i => i.ProdutoCodigo == item.Id).SingleOrDefault();
+            var carrinhoDB = 
+                contexto.Set<Models.Carrinho>()
+                    .Include(c => c.Itens)
+                    .SingleOrDefault();
+
+            var itemDB = carrinhoDB.Itens
+                    .Where(i => i.ProdutoCodigo == item.Id)
+                    .SingleOrDefault();
+
             itemDB.Quantidade = item.Quantidade;
             if (item.Quantidade == 0)
             {
-                carrinho.Itens.Remove(itemDB);
-                await contexto.SaveChangesAsync();
+                contexto.Set<Models.ItemCarrinho>()
+                    .Remove(itemDB);
+                carrinhoDB.Itens.Remove(itemDB);
             }
-            return new UpdateQuantidadeOutput(itemDB, carrinho);
+            await contexto.SaveChangesAsync();
+            return new UpdateQuantidadeOutput(itemDB, carrinhoDB);
         }
     }
 
