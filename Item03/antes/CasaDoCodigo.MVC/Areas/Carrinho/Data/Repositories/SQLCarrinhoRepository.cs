@@ -1,104 +1,104 @@
-﻿using CasaDoCodigo.Areas.Catalogo.Data;
-using CasaDoCodigo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿//using CasaDoCodigo.Areas.Catalogo.Data;
+//using CasaDoCodigo.Models;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
 
-namespace CasaDoCodigo.Areas.Carrinho.Data
-{
-    public class SQLCarrinhoRepository : ICarrinhoRepository
-    {
-        private readonly CarrinhoDbContext contexto;
+//namespace CasaDoCodigo.Areas.Carrinho.Data
+//{
+//    public class SQLCarrinhoRepository : ICarrinhoRepository
+//    {
+//        private readonly CarrinhoDbContext contexto;
 
-        public SQLCarrinhoRepository(CarrinhoDbContext contexto)
-        {
-            this.contexto = contexto;
-        }
+//        public SQLCarrinhoRepository(CarrinhoDbContext contexto)
+//        {
+//            this.contexto = contexto;
+//        }
 
-        public async Task<bool> DeleteCarrinhoAsync(string id)
-        {
-            var carrinho =
-                contexto.Set<Models.Carrinho>()
-                .Where(c => c.ClienteId == id)
-                .SingleOrDefault();
+//        public async Task<bool> DeleteCarrinhoAsync(string id)
+//        {
+//            var carrinho =
+//                contexto.Set<Models.Carrinho>()
+//                .Where(c => c.ClienteId == id)
+//                .SingleOrDefault();
 
-            if (carrinho == null)
-                throw new ApplicationException(string.Format("Carrinho não encontrado: {0}", id));
+//            if (carrinho == null)
+//                throw new ApplicationException(string.Format("Carrinho não encontrado: {0}", id));
 
-            contexto.Set<Models.Carrinho>()
-                .Remove(carrinho);
-            await contexto.SaveChangesAsync();
-            return true;
-        }
+//            contexto.Set<Models.Carrinho>()
+//                .Remove(carrinho);
+//            await contexto.SaveChangesAsync();
+//            return true;
+//        }
 
-        public async Task<Models.Carrinho> GetCarrinhoAsync(string clienteId)
-        {
-            if (string.IsNullOrWhiteSpace(clienteId))
-                throw new ArgumentException();
+//        public async Task<Models.Carrinho> GetCarrinhoAsync(string clienteId)
+//        {
+//            if (string.IsNullOrWhiteSpace(clienteId))
+//                throw new ArgumentException();
 
-            var carrinho =
-            contexto.Set<Models.Carrinho>()
-                .Where(c => c.ClienteId == clienteId)
-                .SingleOrDefault();
+//            var carrinho =
+//            contexto.Set<Models.Carrinho>()
+//                .Where(c => c.ClienteId == clienteId)
+//                .SingleOrDefault();
 
-            if (carrinho == null)
-            {
-                carrinho = new Models.Carrinho(clienteId);
-                contexto.Set<Models.Carrinho>()
-                    .Add(carrinho);
-                await contexto.SaveChangesAsync();
-            }
+//            if (carrinho == null)
+//            {
+//                carrinho = new Models.Carrinho(clienteId);
+//                contexto.Set<Models.Carrinho>()
+//                    .Add(carrinho);
+//                await contexto.SaveChangesAsync();
+//            }
 
-            return carrinho;
-        }
+//            return carrinho;
+//        }
 
-        public IEnumerable<string> GetUsuarios()
-        {
-            return new List<string>();
-        }
+//        public IEnumerable<string> GetUsuarios()
+//        {
+//            return new List<string>();
+//        }
 
-        public async Task<Models.Carrinho> AddItemCarrinhoAsync(string clienteId, ItemCarrinho item)
-        {
-            if (item == null)
-                throw new ArgumentNullException();
+//        public async Task<Models.Carrinho> AddItemCarrinhoAsync(string clienteId, ItemCarrinho item)
+//        {
+//            if (item == null)
+//                throw new ArgumentNullException();
 
-            if (string.IsNullOrWhiteSpace(item.ProdutoCodigo))
-                throw new ArgumentException();
+//            if (string.IsNullOrWhiteSpace(item.ProdutoCodigo))
+//                throw new ArgumentException();
 
-            if (item.Quantidade <= 0)
-                throw new ArgumentOutOfRangeException();
+//            if (item.Quantidade <= 0)
+//                throw new ArgumentOutOfRangeException();
 
-            var carrinho = await GetCarrinhoAsync(clienteId);
-            ItemCarrinho itemDB = carrinho.Itens.Where(i => i.ProdutoCodigo == item.ProdutoCodigo).SingleOrDefault();
-            if (itemDB == null)
-            {
-                itemDB = new ItemCarrinho(carrinho, item.Id, item.ProdutoCodigo, item.ProdutoNome, item.PrecoUnitario, item.Quantidade);
-                carrinho.Itens.Add(item);
-            }
-            return carrinho;
-        }
+//            var carrinho = await GetCarrinhoAsync(clienteId);
+//            ItemCarrinho itemDB = carrinho.Itens.Where(i => i.ProdutoCodigo == item.ProdutoCodigo).SingleOrDefault();
+//            if (itemDB == null)
+//            {
+//                itemDB = new ItemCarrinho(carrinho, item.Id, item.ProdutoCodigo, item.ProdutoNome, item.PrecoUnitario, item.Quantidade);
+//                carrinho.Itens.Add(item);
+//            }
+//            return carrinho;
+//        }
 
-        public async Task<UpdateQuantidadeOutput> UpdateItemCarrinhoAsync(string customerId, UpdateQuantidadeInput item)
-        {
-            if (item == null)
-                throw new ArgumentNullException();
+//        public async Task<UpdateQuantidadeOutput> UpdateItemCarrinhoAsync(string customerId, UpdateQuantidadeInput item)
+//        {
+//            if (item == null)
+//                throw new ArgumentNullException();
 
-            if (string.IsNullOrWhiteSpace(item.Id))
-                throw new ArgumentException();
+//            if (string.IsNullOrWhiteSpace(item.Id))
+//                throw new ArgumentException();
 
-            if (item.Quantidade < 0)
-                throw new ArgumentOutOfRangeException();
+//            if (item.Quantidade < 0)
+//                throw new ArgumentOutOfRangeException();
 
-            var carrinho = await GetCarrinhoAsync(customerId);
-            ItemCarrinho itemDB = carrinho.Itens.Where(i => i.ProdutoCodigo == item.Id).SingleOrDefault();
-            itemDB.Quantidade = item.Quantidade;
-            if (item.Quantidade == 0)
-            {
-                carrinho.Itens.Remove(itemDB);
-            }
-            return new UpdateQuantidadeOutput(itemDB, carrinho);
-        }
-    }
+//            var carrinho = await GetCarrinhoAsync(customerId);
+//            ItemCarrinho itemDB = carrinho.Itens.Where(i => i.ProdutoCodigo == item.Id).SingleOrDefault();
+//            itemDB.Quantidade = item.Quantidade;
+//            if (item.Quantidade == 0)
+//            {
+//                carrinho.Itens.Remove(itemDB);
+//            }
+//            return new UpdateQuantidadeOutput(itemDB, carrinho);
+//        }
+//    }
 
-}
+//}

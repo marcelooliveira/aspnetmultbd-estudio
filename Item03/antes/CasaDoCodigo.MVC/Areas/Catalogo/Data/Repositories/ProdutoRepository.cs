@@ -20,7 +20,7 @@ namespace CasaDoCodigo.Areas.Catalogo.Data.Repositories
     {
         static List<Produto> listaProdutos;
         public ProdutoRepository(IConfiguration configuration,
-            CarrinhoDbContext contexto) : base(configuration, contexto)
+            CatalogoDbContext contexto) : base(configuration, contexto)
         {
         }
 

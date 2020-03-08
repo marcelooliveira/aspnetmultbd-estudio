@@ -7,11 +7,11 @@ namespace CasaDoCodigo.Areas.Catalogo.Data.Repositories
     public abstract class BaseRepository<T> where T : BaseModel
     {
         protected readonly IConfiguration configuration;
-        protected readonly CarrinhoDbContext contexto;
+        protected readonly CatalogoDbContext contexto;
         protected readonly DbSet<T> dbSet;
 
         public BaseRepository(IConfiguration configuration,
-            CarrinhoDbContext contexto)
+            CatalogoDbContext contexto)
         {
             this.configuration = configuration;
             this.contexto = contexto;

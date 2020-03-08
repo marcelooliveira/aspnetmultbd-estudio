@@ -115,7 +115,6 @@
   <ItemGroup>
     <Folder Include="Areas\Cadastro\Data\" />
     <Folder Include="Areas\Cadastro\Models\" />
-    <Folder Include="Areas\Carrinho\Data\Migrations\" />
     <Folder Include="Areas\Pedido\Data\" />
     <Folder Include="Areas\Pedido\Models\" />
     <Folder Include="wwwroot\images\produtos\" />

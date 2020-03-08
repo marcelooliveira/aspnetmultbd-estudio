@@ -41,7 +41,7 @@ namespace CasaDoCodigo
                 options.UseSqlServer(Configuration.GetConnectionString("Default"))
             );
 
-            services.AddDbContext<CarrinhoDbContext>(options =>
+            services.AddDbContext<CatalogoDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("Catalogo"))
             );
 
@@ -60,7 +60,7 @@ namespace CasaDoCodigo
             IServiceProvider serviceProvider)
         {
             MigrateDatabase<ApplicationContext>(app);
-            CreateDatabase<CarrinhoDbContext>(app);
+            CreateDatabase<CatalogoDbContext>(app);
 
             _loggerFactory.AddSerilog();
 
