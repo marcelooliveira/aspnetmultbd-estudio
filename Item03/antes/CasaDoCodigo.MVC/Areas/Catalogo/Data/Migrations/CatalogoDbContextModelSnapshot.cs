@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CasaDoCodigo.Areas.Catalogo.Data.Migrations
 {
-    [DbContext(typeof(CarrinhoDbContext))]
+    [DbContext(typeof(CatalogoDbContext))]
     partial class CatalogoDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

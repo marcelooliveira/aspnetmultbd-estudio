@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>CasaDoCodigo</RootNamespace>
     <LangVersion>7</LangVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -111,6 +115,7 @@
   <ItemGroup>
     <Folder Include="Areas\Cadastro\Data\" />
     <Folder Include="Areas\Cadastro\Models\" />
+    <Folder Include="Areas\Carrinho\Data\Migrations\" />
     <Folder Include="Areas\Pedido\Data\" />
     <Folder Include="Areas\Pedido\Models\" />
     <Folder Include="wwwroot\images\produtos\" />
