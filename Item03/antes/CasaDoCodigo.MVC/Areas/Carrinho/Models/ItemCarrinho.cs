@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CasaDoCodigo.Models
+namespace CasaDoCodigo.Areas.Carrinho.Models
 {
-    public class ItemCarrinho : IValidatableObject
+    public class ItemCarrinho :  BaseModel, IValidatableObject
     {
         public ItemCarrinho() 
         {
              
         }
 
-        public ItemCarrinho(Carrinho carrinho, string id, string produtoCodigo, string produtoNome, decimal precoUnitario, int quantidade)
+        public ItemCarrinho(Carrinho carrinho, string produtoCodigo, string produtoNome, decimal precoUnitario, int quantidade)
         {
             Carrinho = carrinho;
-            Id = id;
             ProdutoCodigo = produtoCodigo;
             ProdutoNome = produtoNome;
             PrecoUnitario = precoUnitario;
@@ -22,7 +21,6 @@ namespace CasaDoCodigo.Models
 
         [Required]
         public Carrinho Carrinho { get; private set; }
-        public string Id { get; set; }
         [Required]
         public string ProdutoCodigo { get; set; }
         [Required]

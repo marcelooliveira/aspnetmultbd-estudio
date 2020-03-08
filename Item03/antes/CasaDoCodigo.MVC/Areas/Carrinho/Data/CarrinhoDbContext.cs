@@ -12,11 +12,11 @@ namespace CasaDoCodigo.Areas.Catalogo.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<CasaDoCodigo.Models.Carrinho>().HasKey(t => t.ClienteId);
-            modelBuilder.Entity<CasaDoCodigo.Models.Carrinho>().HasMany(t => t.Itens)
+            modelBuilder.Entity<Carrinho.Models.Carrinho>().HasKey(t => t.ClienteId);
+            modelBuilder.Entity<Carrinho.Models.Carrinho>().HasMany(t => t.Itens)
                 .WithOne(t => t.Carrinho);
-            modelBuilder.Entity<CasaDoCodigo.Models.ItemCarrinho>().HasKey(t => t.Id);
-            modelBuilder.Entity<CasaDoCodigo.Models.ItemCarrinho>().HasOne(t => t.Carrinho);
+            modelBuilder.Entity<Carrinho.Models.ItemCarrinho>().HasKey(t => t.Id);
+            modelBuilder.Entity<Carrinho.Models.ItemCarrinho>().HasOne(t => t.Carrinho);
         }
     }
 }

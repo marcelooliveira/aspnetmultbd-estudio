@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Models;
+﻿using CasaDoCodigo.Areas.Carrinho.Models;
+using CasaDoCodigo.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StackExchange.Redis;
@@ -74,7 +75,7 @@ namespace CasaDoCodigo.Areas.Carrinho.Data
             ItemCarrinho itemDB = carrinho.Itens.Where(i => i.ProdutoCodigo == item.ProdutoCodigo).SingleOrDefault();
             if (itemDB == null)
             {
-                itemDB = new ItemCarrinho(carrinho, item.Id, item.ProdutoCodigo, item.ProdutoNome, item.PrecoUnitario, item.Quantidade);
+                itemDB = new ItemCarrinho(carrinho, item.ProdutoCodigo, item.ProdutoNome, item.PrecoUnitario, item.Quantidade);
                 carrinho.Itens.Add(item);
             }
             return await UpdateCarrinhoAsync(carrinho);
@@ -98,8 +99,8 @@ namespace CasaDoCodigo.Areas.Carrinho.Data
             {
                 basket.Itens.Remove(itemDB);
             }
-            Models.Carrinho customerBasket = await UpdateCarrinhoAsync(basket);
-            return new UpdateQuantidadeOutput(itemDB, customerBasket);
+            Models.Carrinho carrinho = await UpdateCarrinhoAsync(basket);
+            return new UpdateQuantidadeOutput(itemDB, carrinho);
         }
 
         private IServer GetServer()

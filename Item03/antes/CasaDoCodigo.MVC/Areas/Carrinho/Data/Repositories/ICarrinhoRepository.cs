@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Models;
+﻿using CasaDoCodigo.Areas.Carrinho.Models;
+using CasaDoCodigo.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

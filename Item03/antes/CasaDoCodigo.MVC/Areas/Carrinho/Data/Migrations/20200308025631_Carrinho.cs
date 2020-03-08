@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CasaDoCodigo.Areas.Carrinho.Data.Migrations
 {
@@ -21,7 +22,8 @@ namespace CasaDoCodigo.Areas.Carrinho.Data.Migrations
                 name: "ItemCarrinho",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CarrinhoClienteId = table.Column<string>(nullable: false),
                     ProdutoCodigo = table.Column<string>(nullable: false),
                     ProdutoNome = table.Column<string>(nullable: false),

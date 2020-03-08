@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Areas.Catalogo.Data;
+﻿using CasaDoCodigo.Areas.Carrinho.Data;
+using CasaDoCodigo.Areas.Catalogo.Data;
 using CasaDoCodigo.Areas.Catalogo.Data.Repositories;
 using CasaDoCodigo.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -54,6 +55,7 @@ namespace CasaDoCodigo
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddTransient<ICadastroRepository, CadastroRepository>();
+            services.AddTransient<ICarrinhoRepository, SQLCarrinhoRepository>();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -64,6 +66,7 @@ namespace CasaDoCodigo
             IServiceProvider serviceProvider)
         {
             MigrateDatabase<ApplicationContext>(app);
+            MigrateDatabase<CarrinhoDbContext>(app);
             CreateDatabase<CatalogoDbContext>(app);
 
             _loggerFactory.AddSerilog();
