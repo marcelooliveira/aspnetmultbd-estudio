@@ -3,7 +3,7 @@
 }
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using  CasaDoCodigo.Models;
+@using CasaDoCodigo.Areas.Carrinho.Models;
 @model Carrinho;
 
 <h3>Meu Carrinho</h3>
@@ -36,7 +36,7 @@
     <div class="panel-body">
         @foreach (var item in Model.Itens)
         {
-            <div class="row row-center linha-produto" item-id="@item.Id">
+            <div class="row row-center linha-produto" item-id="@item.ProdutoCodigo">
                 <div class="col-md-3">
                     <img class="img-produto-carrinho" src="/images/produtos/large_@(item.ProdutoCodigo).jpg" />
                 </div>

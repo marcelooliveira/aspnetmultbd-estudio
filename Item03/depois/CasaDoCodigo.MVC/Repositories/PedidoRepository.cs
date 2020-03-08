@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Areas.Catalogo.Data.Repositories;
+﻿using CasaDoCodigo.Areas.Carrinho.Models;
+using CasaDoCodigo.Areas.Catalogo.Data.Repositories;
 using CasaDoCodigo.Areas.Identity.Data;
 using CasaDoCodigo.Models;
 using Microsoft.AspNetCore.Http;
@@ -136,7 +137,7 @@ namespace CasaDoCodigo.Repositories
             var pedido = await GetPedidoAsync();
             foreach (var item in carrinho.Itens)
             {
-                var itemPedido = await AddItemAsync(item.Id, item.Quantidade);
+                var itemPedido = await AddItemAsync(item.ProdutoCodigo, item.Quantidade);
                 await UpdateQuantidadeAsync(itemPedido);
             }
 

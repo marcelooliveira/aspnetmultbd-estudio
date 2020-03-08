@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CasaDoCodigo.Models
+namespace CasaDoCodigo.Areas.Carrinho.Models
 {
     public class ItemCarrinho : IValidatableObject
     {

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CasaDoCodigo.Models
+namespace CasaDoCodigo.Areas.Carrinho.Models
 {
     public class Carrinho
     {
         public Carrinho()
         {
+            Itens = new List<ItemCarrinho>();
         }
 
         public Carrinho(string clienteId)

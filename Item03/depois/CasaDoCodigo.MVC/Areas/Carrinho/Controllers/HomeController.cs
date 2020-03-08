@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CasaDoCodigo.Areas.Carrinho.Data;
+using CasaDoCodigo.Areas.Carrinho.Models;
 using CasaDoCodigo.Areas.Catalogo.Data.Repositories;
 using CasaDoCodigo.Areas.Identity.Data;
 using CasaDoCodigo.Models;

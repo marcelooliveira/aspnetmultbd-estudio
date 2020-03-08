@@ -1,4 +1,5 @@
-﻿using CasaDoCodigo.Models;
+﻿using CasaDoCodigo.Areas.Carrinho.Models;
+using CasaDoCodigo.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StackExchange.Redis;
