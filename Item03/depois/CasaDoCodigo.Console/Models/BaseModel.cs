@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace CasaDoCodigo.Areas.Catalogo.Models
+namespace CasaDoCodigo.Areas.Carrinho.Models
 {
     [DataContract]
     public abstract class BaseModel : IComparable
