@@ -43,6 +43,9 @@
     <Compile Include="Areas\Cadastro\Controllers\HomeController.cs" />
     <Compile Include="Areas\Carrinho\Controllers\HomeController.cs" />
     <Compile Include="Areas\Carrinho\Data\CarrinhoDbContext.cs" />
+    <Compile Include="Areas\Carrinho\Data\Migrations\20200308014634_Carrinho.cs" />
+    <Compile Include="Areas\Carrinho\Data\Migrations\20200308014634_Carrinho.Designer.cs" />
+    <Compile Include="Areas\Carrinho\Data\Migrations\CarrinhoDbContextModelSnapshot.cs" />
     <Compile Include="Areas\Carrinho\Data\Repositories\ICarrinhoRepository.cs" />
     <Compile Include="Areas\Carrinho\Data\Repositories\SQLCarrinhoRepository.cs" />
     <Compile Include="Areas\Carrinho\Data\Repositories\RedisCarrinhoRepository.cs" />

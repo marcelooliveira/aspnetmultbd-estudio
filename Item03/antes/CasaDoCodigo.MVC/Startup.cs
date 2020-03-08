@@ -41,6 +41,10 @@ namespace CasaDoCodigo
                 options.UseSqlServer(Configuration.GetConnectionString("Default"))
             );
 
+            services.AddDbContext<CarrinhoDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("Carrinho"))
+            );
+
             services.AddDbContext<CatalogoDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("Catalogo"))
             );
