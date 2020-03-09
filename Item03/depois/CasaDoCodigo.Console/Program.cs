@@ -28,6 +28,7 @@ namespace CasaDoCodigo.Console
             json = await _database.StringGetAsync(key: "id_do_cliente");
             carrinho = JsonConvert.DeserializeObject<Carrinho>(json);
 
+
             ImprimirCarrinho(carrinho);
 
             var itemCarrinho = 
