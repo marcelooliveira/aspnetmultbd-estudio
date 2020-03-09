@@ -9,25 +9,23 @@ namespace CasaDoCodigo.Console
 {
     class Program
     {
-        private const string clienteId = "id_do_cliente";
-
         static async Task Main(string[] args)
         {
             IConnectionMultiplexer _redis = await ConnectionMultiplexer.ConnectAsync("localhost");
             IDatabase _database = _redis.GetDatabase();
 
             Carrinho carrinho = null;
-            ItemCarrinho novoItemCarrinho = new ItemCarrinho(clienteId, "001", "ASP.NET Core com Múltiplas Bases de Dados", 50.0m, 1);
-            var json = await _database.StringGetAsync(clienteId);
-            if (json.IsNullOrEmpty)
+            string json;
+            if (!await _database.KeyExistsAsync(key: "id_do_cliente"))
             {
-                carrinho = new Carrinho(clienteId);
+                carrinho = new Carrinho("id_do_cliente");
+                var novoItemCarrinho = new ItemCarrinho("id_do_cliente", "001", "ASP.NET Core com Múltiplas Bases de Dados", 50.0m, 1);
                 carrinho.Itens.Add(novoItemCarrinho);
                 json = JsonConvert.SerializeObject(carrinho);
-                await _database.StringSetAsync(clienteId, json);
+                await _database.StringSetAsync(key: "id_do_cliente", json);
             }
 
-            json = await _database.StringGetAsync(clienteId);
+            json = await _database.StringGetAsync(key: "id_do_cliente");
             carrinho = JsonConvert.DeserializeObject<Carrinho>(json);
 
             ImprimirCarrinho(carrinho);
@@ -37,11 +35,11 @@ namespace CasaDoCodigo.Console
 
             itemCarrinho.Quantidade = 7;
             json = JsonConvert.SerializeObject(carrinho);
-            await _database.StringSetAsync(clienteId, json);
+            await _database.StringSetAsync(key: "id_do_cliente", json);
 
             ImprimirCarrinho(carrinho);
 
-            await _database.KeyDeleteAsync(clienteId);
+            await _database.KeyDeleteAsync(key: "id_do_cliente");
 
             System.Console.WriteLine("Tecle ENTER para sair...");
             System.Console.ReadLine();
