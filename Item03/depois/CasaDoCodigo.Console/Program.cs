@@ -10,12 +10,11 @@ namespace CasaDoCodigo.Console
     class Program
     {
         private const string clienteId = "id_do_cliente";
-        private const int CARRINHO_DB_INDEX = 0;
 
         static async Task Main(string[] args)
         {
-            IConnectionMultiplexer _redis = ConnectionMultiplexer.Connect("localhost");
-            IDatabase _database = _redis.GetDatabase(CARRINHO_DB_INDEX);
+            IConnectionMultiplexer _redis = await ConnectionMultiplexer.ConnectAsync("localhost");
+            IDatabase _database = _redis.GetDatabase(db: 0);
 
             Carrinho carrinho = null;
             ItemCarrinho novoItemCarrinho = new ItemCarrinho(clienteId, "001", "ASP.NET Core com Múltiplas Bases de Dados", 50.0m, 1);
