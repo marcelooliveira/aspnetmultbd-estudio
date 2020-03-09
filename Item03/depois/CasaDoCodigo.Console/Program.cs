@@ -14,7 +14,7 @@ namespace CasaDoCodigo.Console
         static async Task Main(string[] args)
         {
             IConnectionMultiplexer _redis = await ConnectionMultiplexer.ConnectAsync("localhost");
-            IDatabase _database = _redis.GetDatabase(db: 0);
+            IDatabase _database = _redis.GetDatabase();
 
             Carrinho carrinho = null;
             ItemCarrinho novoItemCarrinho = new ItemCarrinho(clienteId, "001", "ASP.NET Core com Múltiplas Bases de Dados", 50.0m, 1);
